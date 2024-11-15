@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "_Root.Head";
+}
+
+@{
+    var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
+    var isHomePage = controllerName.Equals("home", StringComparison.InvariantCultureIgnoreCase);
+}
+
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
+@await Html.PartialAsync("_Notifications")
+
+@await Component.InvokeAsync("AdminHeaderLinks")
+@await Html.PartialAsync("_JavaScriptDisabledWarning")
+@await Html.PartialAsync("_OldInternetExplorerWarning")
+<div class="overlayOffCanvas"></div>
+@await Html.PartialAsync("_Header")
+<div class="master-wrapper-page">
+    <div class="responsive-nav-wrapper-parent">
+        <div class="responsive-nav-wrapper">
+            <div class="menu-title">
+                <span>@T("SevenSpikes.Themes.Common.MenuTitle")</span>
+            </div>
+            <div class="search-wrap">
+                <span>@T("Search")</span>
+            </div>
+            <div class="shopping-cart-link">
+                <a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a>
+            </div>
+            <div class="personal-button" id="header-links-opener">
+                <span>@T("SevenSpikes.Themes.Common.Personal")</span>
+            </div>
+            <div class="filters-button">
+                <span>@T("SevenSpikes.Themes.Common.Filters")</span>
+            </div>
+        </div>
+    </div>
+    <div class="justAFixingDivBefore"></div>
+    <div class="header-menu">
+        <div class="close-menu">
+            <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+        </div>
+        @{
+            var menu = await Component.InvokeAsync("Widget", new { widgetZone = "theme_header_menu" });
+            var topMenu = (await Component.InvokeAsync("TopMenu")).ToHtmlString();
+        }
+        @if (String.IsNullOrEmpty(menu.ToHtmlString()))
+        {
+            @Html.Raw(topMenu)
+        }
+        else
+        {
+            @menu
+        }
+    </div>
+    @if (isHomePage)
+    {
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_main_slider" });
+    }
+    <div class="master-wrapper-content">
+        <script asp-location="Footer">
+			var localized_data = {
+	            AjaxCartFailure: "@T("AjaxCart.Failure")"
+	        };
+            AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart', localized_data);
+        </script>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentBefore })
+        @*ajax loading window*@
+        <div class="ajax-loading-block-window" style="display: none">
+            <div class="loading-image">
+            </div>
+        </div>
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentAfter })
+    </div>
+</div>
+@if (isHomePage)
+{
+    @await Component.InvokeAsync("HomepagePolls")
+    @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_bottom" })
+}
+@await Component.InvokeAsync("NewsletterBox")
+@await Component.InvokeAsync("Footer")
+@await Component.InvokeAsync("EuCookieLaw")
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore })

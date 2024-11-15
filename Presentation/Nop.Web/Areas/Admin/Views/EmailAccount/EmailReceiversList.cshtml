@@ -1,0 +1,59 @@
+@model EmailAccountSearchModel
+
+@{
+    //page title
+    ViewBag.PageTitle = T("Admin.Configuration.EmailReceivers").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Email receivers");
+}
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Admin.Configuration.EmailReceivers")
+    </h1>
+    <div class="pull-right">
+        <a asp-action="CreateEmailReceiver" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            @T("Admin.Common.AddNew")
+        </a>
+        @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.EmailAccountListButtons })
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @await Html.PartialAsync("Table", new DataTablesModel
+                    {
+                        Name = "email-receiver-grid",
+                        UrlRead = new DataUrl("EmailReceiversList", "EmailAccount", null),
+                        Length = Model.PageSize,
+                        LengthMenu = Model.AvailablePageSizes,
+                        ColumnCollection = new List<ColumnProperty>
+                        {
+                            new ColumnProperty(nameof(EmailReceiverModel.EmailAddress))
+                            {
+                                Title = T("Admin.Configuration.EmailAccounts.Fields.Email").Text,
+                                Width = "200"
+                            },
+                            new ColumnProperty(nameof(EmailReceiverModel.PermissionText))
+                            {
+                                Title = T("Admin.Configuration.EmailAccounts.Fields.Permissions").Text,
+                                Width = "200"
+                            },
+                            new ColumnProperty(nameof(EmailAccountModel.Id))
+                            {
+                                Title = T("Admin.Common.Edit").Text,
+                                Width = "100",
+                                ClassName =  NopColumnClassDefaults.Button,
+                                Render = new RenderButtonEdit(new DataUrl("EditEmailReceiver"))
+                            }
+                        }
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

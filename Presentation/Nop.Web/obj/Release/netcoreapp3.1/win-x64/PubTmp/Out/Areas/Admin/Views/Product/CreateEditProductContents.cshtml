@@ -1,0 +1,167 @@
+@model ProductContentModel
+
+@{
+    //page title
+    if(Model.Id > 0) {
+        ViewBag.PageTitle = T("Admin.Product.Contents.AddNew").Text;
+    } else {
+        ViewBag.PageTitle = T("Admin.Product.Contents.Edit").Text;
+    }
+
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("ProductContents");
+
+    var adminAreaSettings = EngineContext.Current.Resolve<AdminAreaSettings>();
+}
+
+<form asp-controller="Product" asp-action="CreateEditProductContents" method="post" id="productcontents-form">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @if(Model.Id > 0) {
+                @T("Admin.Product.Contents.AddNew")
+            } else {
+                @T("Admin.Product.Contents.Edit")
+            }
+
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a asp-action="ProductContents">@T("Admin.Catalog.Contents.BackToList")</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+    <div asp-validation-summary="All"></div>
+    <input asp-for="Id" type="hidden" />
+
+    <div class="content">
+        <div class="form-horizontal">
+            <nop-panels id="productcontents-panels">
+                <nop-panel asp-name="productcontents-info" asp-icon="fa fa-info" asp-title="@T("Admin.Product.Contents.Info")" asp-hide-block-attribute-name="productcontents" asp-hide="false" asp-advanced="false">
+                    <div class="panel-body">
+                        @(Html.LocalizedEditor<ProductContentModel, ProductContentLocalizedModel>("productcontents-info-localized",
+                            @<div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <nop-label asp-for="@Model.Locales[item].Title"/>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <nop-editor asp-for="@Model.Locales[item].Title"/>
+                                        <span asp-validation-for="@Model.Locales[item].Title"></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="hidden" asp-for="@Model.Locales[item].LanguageId" />
+                                </div>
+                            </div>
+                        ,
+                            @<div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <nop-label asp-for="Title"/>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <nop-editor asp-for="Title" asp-required="true"/>
+                                        <span asp-validation-for="Title"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="ProductContentTypeId" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-select asp-for="ProductContentTypeId" asp-items="@Model.ProductContentTypes" />
+                                <span asp-validation-for="ProductContentTypeId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="Link" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="Link" />
+                                <span asp-validation-for="Link"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="ThumbPictureId" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="ThumbPictureId" />
+                                <span asp-validation-for="ThumbPictureId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="IsActive" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="IsActive" />
+                                <span asp-validation-for="IsActive"></span>
+                            </div>
+                        </div>
+                    </div>
+                </nop-panel>
+                <nop-panel asp-name="productcontents-products" asp-icon="fa fa-info" asp-title="@T("Admin.Product.Contents.Products")" asp-hide-block-attribute-name="productcontentproductss" asp-hide="false" asp-advanced="false">
+                    @if(Model.Id > 0) {
+                        <div class="panel-body">
+                            @await Html.PartialAsync("Table", new DataTablesModel {
+                            Name = "products-grid",
+                            UrlRead = new DataUrl("ProductContentMappingList", "Product", new RouteValueDictionary { ["ProductContentId"] = Model.Id }),
+                            UrlDelete = new DataUrl("ProductContentMappingDelete", "Product", null),
+                            Length = adminAreaSettings.DefaultGridPageSize,
+                            LengthMenu = adminAreaSettings.GridPageSizes,
+                            ColumnCollection = new List<ColumnProperty>
+                                {
+                                    new ColumnProperty(nameof(ProductContentMappingModel.ProductName))
+                                    {
+                                        Title = T("Admin.Catalog.Categories.Products.Fields.Product").Text
+                                    },                                    
+                                    new ColumnProperty(nameof(ProductContentMappingModel.Id))
+                                    {
+                                        Title = T("Admin.Common.Delete").Text,
+                                        Width = "100",
+                                        Render = new RenderButtonRemove(T("Admin.Common.Delete").Text),
+                                        ClassName = NopColumnClassDefaults.Button
+                                    }
+                                }
+                        })
+                        </div>
+                        <div class="panel-footer">
+                            <button type="submit" id="btnAddNewProduct"
+                                    onclick="javascript:OpenWindow('@(Url.Action("ProductContentMappingAddPopup", "Product", new { productContentId = Model.Id, btnId = "btnRefreshProducts", formId = "productcontents-form" }))', 800, 800, true); return false;"
+                                    class="btn btn-primary">
+                                @T("Admin.Catalog.Categories.Products.AddNew")
+                            </button>
+                            <input type="submit" id="btnRefreshProducts" style="display: none" />
+                            <script>
+                                $(document).ready(function () {
+                                    $('#btnRefreshProducts').click(function () {
+                                        //refresh grid
+                                        updateTable('#products-grid');
+
+                                        //return false to don't reload a page
+                                        return false;
+                                    });
+                                });
+                            </script>
+                        </div>
+                    } else {
+                        <div class="panel-body">
+                            @T("Admin.Catalog.Categories.Products.SaveBeforeEdit")
+                        </div>
+                    }
+                </nop-panel>
+            </nop-panels>
+
+        </div>
+    </div>
+</form>

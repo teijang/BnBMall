@@ -1,0 +1,40 @@
+@model EmailReceiverModel
+
+<div asp-validation-summary="ModelOnly"></div>
+<input asp-for="Id" type="hidden" />
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="EmailAddress" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="EmailAddress" asp-required="true" />
+                            <span asp-validation-for="EmailAddress"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="Permissions" />
+                        </div>
+                        <div class="col-md-9">
+                            @foreach(var item in Model.PermissionList) {
+                                if(Model.Permissions.Any(x => x == Convert.ToInt32(item.Value))) {
+                                    <input type="checkbox" name="Permissions" value="@item.Value" checked="checked" /> <text>&nbsp;</text> @item.Text
+                                } else {
+                                    <input type="checkbox" name="Permissions" value="@item.Value" /> <text>&nbsp;</text> @item.Text
+                                }
+                                <br />
+                            }
+                            <span asp-validation-for="Permissions"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

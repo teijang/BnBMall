@@ -1,0 +1,62 @@
+﻿@model ProductContentTypeSearchModel
+@using Nop.Core.Domain.Catalog;
+
+@{
+    //page title
+    ViewBag.PageTitle = T("Admin.Product.ContentTypes").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("ProductContentTypes");
+}
+
+<form asp-controller="Product" asp-action="ProductContentTypesList" method="post">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Product.ContentTypes")
+        </h1>
+        <div class="pull-right">
+            <a asp-action="CreateEditProductContentType" class="btn bg-blue">
+                <i class="fa fa-plus-square"></i>
+                @T("Admin.Common.AddNew")
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @await Html.PartialAsync("Table", new DataTablesModel {
+                           Name = "productcontenttypes-grid",
+                           UrlRead = new DataUrl("ProductContentTypesList", "Product", null),
+                           UrlDelete = new DataUrl("ProductContentTypeDelete", "Product", null),
+                           Length = Model.PageSize,
+                           LengthMenu = Model.AvailablePageSizes,
+                           ColumnCollection = new List<ColumnProperty>
+                                {
+                                    new ColumnProperty(nameof(ProductContentTypeModel.Name))
+                                    {
+                                        Title = T("Admin.Product.ContentType.Name").Text
+                                    },
+                                    new ColumnProperty(nameof(ProductContentTypeModel.Id))
+                                    {
+                                        Title = T("Admin.Common.Edit").Text,
+                                        Width = "100",
+                                        ClassName =  NopColumnClassDefaults.Button,
+                                        Render = new RenderButtonEdit(new DataUrl("CreateEditProductContentType"))
+                                    },
+                                    new ColumnProperty(nameof(ProductContentTypeModel.Id))
+                                    {
+                                        Title = T("Admin.Common.Delete").Text,
+                                        Width = "100",
+                                        Render = new RenderButtonRemove(T("Admin.Common.Delete").Text),
+                                        ClassName = NopColumnClassDefaults.Button
+                                    }
+                                }
+                       })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,97 @@
+@model ProductQAModel
+
+<div asp-validation-summary="All"></div>
+<input asp-for="Id" type="hidden" />
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="ProductName" />
+                        </div>
+                        <div class="col-md-9">
+                            <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.ProductId">@Model.ProductName</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="StoreName" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-text-row">@Model.StoreName</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="CustomerInfo" />
+                        </div>
+                        <div class="col-md-9">
+                            <a asp-controller="Customer" asp-action="Edit" asp-route-id="@Model.CustomerId">@Model.CustomerInfo</a>
+                        </div>
+                    </div>                   
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="Question" />
+                        </div>
+                        <div class="col-md-9">
+                            @if (Model.IsLoggedInAsVendor)
+                            {
+                                @Html.Raw(Nop.Core.Html.HtmlHelper.FormatText(Model.Question, false, true, false, false, false, false))
+                            }
+                            else
+                            {
+                                <nop-textarea asp-for="Question" asp-required="true" />
+                                <span asp-validation-for="Question"></span>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="Answer" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-textarea asp-for="Answer" />
+                            <span asp-validation-for="Answer"></span>
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="IsApproved" />
+                        </div>
+                        <div class="col-md-9">
+                            @if (Model.IsLoggedInAsVendor)
+                            {
+                                <div class="form-text-row">
+                                    @if (Model.IsApproved)
+                                    {
+                                        <i class="fa fa-check true-icon"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-close false-icon"></i>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <nop-editor asp-for="IsApproved" />
+                                <span asp-validation-for="IsApproved"></span>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="CreatedOn" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-text-row">@Model.CreatedOn</div>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

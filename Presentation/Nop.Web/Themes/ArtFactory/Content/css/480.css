@@ -1,0 +1,203 @@
+﻿/*=====================================================
+    
+    TABLETS PORTRAIT & SMARTPHONES LANDSCAPE
+
+=====================================================*/
+
+@media all and (min-width: 481px) {
+	
+/* HEADER */
+
+.search-box input.search-box-text {
+	width: 300px !important;
+}
+.ui-autocomplete.ui-menu.ui-widget.ui-widget-content {
+	width: 300px !important; /*txtfield + button*/
+}
+.eu-cookie-bar-notification {
+    width: 450px;
+    max-width: 95%;
+    margin-left: -225px;
+}
+
+/* FOOTER */
+
+.newsletter-email input[type="text"],
+.newsletter-email input[type="email"] {
+    width: 300px;
+}
+
+/* CATEGORY PAGE & GRIDS */
+
+    .item-box {
+        float: left;
+    }
+.product-grid .item-box,
+.product-list .item-box,
+.manufacturer-grid .item-box,
+.search-results .product-list .item-box,
+.vendor-grid .item-box {
+	width: 49.75%; /*two per row*/
+	margin-left: .5%;
+    max-width: none;
+}
+    .home-page-category-grid .item-box,
+    .sub-category-grid .item-box {
+        margin: 0 .5% 1%;
+        width: 49%;
+    }
+
+/* QUICK TABS */
+
+    .ui-tabs .ui-tabs-nav li {
+        width: 33.33333%;
+        float: left;
+    }
+    .ui-tabs .ui-tabs-nav li a {
+        margin-left: 3px;
+    }
+        .ui-tabs .ui-tabs-nav li:nth-child(3n+1) a {
+            margin-left: 0;
+        }
+
+/* PASSWORD PROTECTION */
+
+.enter-password-form input[type="password"] {
+	width: 300px !important;
+}
+
+/* REGISTRATION, LOGIN, MY ACCOUNT */
+
+.registration-page .date-of-birth select,
+.account-page .date-of-birth select {
+	width: 110px;
+}
+
+/* SHOPPING CART & CHECKOUT */
+
+.checkout-page .address-item {
+    margin: 0 1% 20px;
+    max-width: none;
+    width: 48%;
+    float: left;
+}
+
+.order-review-data > div,
+.order-details-area > div,
+.shipment-details-area > div {
+    float: left;
+    margin: 0 2% 30px 0;
+    width: 49%;
+}
+    .order-review-data > div:last-child,
+    .order-details-area > div:last-child,
+    .shipment-details-area > div:last-child {
+        margin-right: 0;
+    }
+
+.shipment-details-page .shipment-overview > ul {
+    float: left;
+    width: 48%;
+    margin: 0 1% !important;
+}
+
+/* POLLS */
+
+    .polls-centering .poll {
+        float: left;
+        display: block;
+        width: 50%;
+        padding: 0 20px;
+        min-width: 0;
+    }
+
+}
+
+@media all and (min-width: 481px) and (max-width: 768px) {
+
+    .product-grid .item-box:nth-child(2n+1),
+    .product-list .item-box:nth-child(2n+1),
+    .manufacturer-grid .item-box:nth-child(2n+1),
+    .search-results .product-list .item-box:nth-child(2n+1),
+    .vendor-grid .item-box:nth-child(2n+1) {
+	    clear: both;
+	    margin-left: 0;
+    }
+
+/* BLOCKS */
+
+    .side-2 .block {
+        width: 49%;
+        margin: 0 .5% 1%;
+        float: left;
+    }
+        .side-2 .block:nth-of-type(2n+1) {
+            clear: both;
+        }
+
+/* MY ACCOUNT */
+
+    .account-page .address-item,
+    .account-page .order-item {
+        float: left;
+        width: 49%;
+        margin: 0 0 3% 1%;
+    }
+        .account-page .address-item:nth-child(2n+1),
+        .account-page .order-item:nth-child(2n+1) {
+            margin-left: 0;
+            clear: both;
+        }
+
+}
+
+
+@media all and (min-width: 560px) {
+
+    .news-items .news-item {
+        float: left;
+        width: 49%;
+        margin: 0 0 2% 2%;
+    }
+        .news-items .news-item:nth-child(2n+1) {
+            margin-left: 0;
+        }
+
+    .news-list-homepage .view-all {
+        clear: both;
+    }
+
+}
+
+@media all and (min-width: 680px) {
+
+/* NEWSLETTER */
+
+    .newsletter .title {
+        width: 315px;
+        margin: 0 auto 10px;
+        text-align: left;
+    }
+
+    .newsletter {
+        padding: 45px 0;
+    }
+    .newsletter-subscribe {
+        padding:  0 0 0 115px;
+    }
+    .newsletter-subscribe:before {
+        top: 50%;
+        right: auto;
+        margin-top: -65px;
+    }
+    .newsletter-email input[type="text"],
+    .newsletter-email input[type="email"] {
+        margin: 0;
+    }
+    .newsletter-email input[type="button"] {
+        float: left;
+        clear: none;
+        margin: 2px 0 0 20px;
+    }
+
+}

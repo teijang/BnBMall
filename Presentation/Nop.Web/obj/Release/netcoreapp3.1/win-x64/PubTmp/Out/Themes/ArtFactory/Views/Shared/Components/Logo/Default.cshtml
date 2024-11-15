@@ -1,0 +1,27 @@
+﻿@model LogoModel
+
+@using Nop.Core
+@using Nop.Services.Localization
+
+@inject IThemeContext themeContext
+@inject IStoreContext storeContext
+@inject ILocalizationService localizationService
+
+@{
+    //logo path
+    var logoPath = $"~/Themes/{themeContext.WorkingThemeName}/Content/img/logo.png";
+
+    var artFactoryLogo = await Component.InvokeAsync("Widget", new { widgetZone = "artfactory_theme_logo"});
+}
+
+<a href="@Url.RouteUrl("Homepage")" class="logo">
+    @if (!String.IsNullOrEmpty(artFactoryLogo.ToHtmlString()))
+    {
+        @artFactoryLogo
+    }
+    else
+    {
+            string storeName = localizationService.GetLocalized(storeContext.CurrentStore, x => x.Name);
+            <img title="" alt="@Model.StoreName" src="@Url.Content(logoPath)">
+    }
+</a>

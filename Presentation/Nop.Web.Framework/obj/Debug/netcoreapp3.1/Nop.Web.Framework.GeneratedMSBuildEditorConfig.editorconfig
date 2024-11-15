@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = Nop.Web.Framework
+build_property.ProjectDir = C:\git\BnBmall\nopCommerce_4.30_Source\Presentation\Nop.Web.Framework\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

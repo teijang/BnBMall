@@ -1,0 +1,97 @@
+﻿@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject IWorkContext workContext
+@inject ISettingService settingService
+
+@model FooterModel
+
+@{
+    var storeId = storeContext.CurrentStore.Id;
+    var removeDesignedBy = settingService.GetSettingByKey("artfactorythemesettings.removedesignedby", false, storeId, true);
+    var removeCopyright = settingService.GetSettingByKey("artfactorythemesettings.removecopyright", false, storeId, true);
+}
+
+<div class="footer">
+    <div class="footer-upper">
+        <div class="footer-centering">
+            <div class="footer-block">
+                <ul class="footer-menu">
+                    @if (Model.DisplayContactUsFooterItem)
+                    {
+                        <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                    }
+                    @if (Model.SitemapEnabled && Model.DisplaySitemapFooterItem)
+                    {
+                        <li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+                    }
+                    @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+                    {
+                        <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                    }
+                    @if (Model.AllowCustomersToApplyForVendorAccount && Model.DisplayApplyVendorAccountFooterItem)
+                    {
+                        <li><a href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="footer-block social-sharing">
+                <h3>@T("SevenSpikes.Themes.ArtFactory.Common.Social")</h3>
+		@await Component.InvokeAsync("SocialButtons")
+
+            </div>
+            <div class="footer-block contact-block">
+                @*<h3>@T("SevenSpikes.Themes.Allure.Common.Contact")</h3>*@
+                <ul class="footer-menu">
+                    <li class="phone">@T("SevenSpikes.Themes.ArtFactory.Common.Phone")</li>
+                    <li class="fax">@T("SevenSpikes.Themes.ArtFactory.Common.Fax")</li>
+                    <li class="email">@T("SevenSpikes.Themes.ArtFactory.Common.EmailName") @T("SevenSpikes.Themes.ArtFactory.Common.EmailAt") @T("SevenSpikes.Themes.ArtFactory.Common.EmailDomain")</li>
+                    <li class="location">@T("SevenSpikes.Themes.ArtFactory.Common.Location")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-lower">
+        <div class="footer-centering">
+            <div class="accepted-payment-methods">
+                <ul>
+                    <li class="method1"></li>
+                    <li class="method2"></li>
+                    <li class="method3"></li>
+                    <li class="method4"></li>
+                </ul>
+            </div>
+            <div class="footer-disclaimer">
+                @T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)
+            </div>
+            @if (!removeCopyright)
+            {
+                <div class="footer-powered-by">
+                    Powered by <a href="https://www.nopcommerce.com/">nopCommerce</a>
+                    @*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
+                        Find more info here https://www.nopcommerce.com/nopcommerce-copyright-removal-key*@
+                </div>
+            }
+            @if (!removeDesignedBy)
+            {
+                <div class="footer-designed-by">
+                    Designed by <a href="https://www.nop-templates.com/" target="_blank">Nop-Templates.com</a>
+                </div>
+            }
+
+            @if (Model.DisplayTaxShippingInfoFooter)
+            {
+            	var inclTax = workContext.TaxDisplayType == TaxDisplayType.IncludingTax;
+	        <div class="footer-tax-shipping">
+	        	@T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
+	        </div>
+            }
+            <div class="footer-store-theme">
+                @await Component.InvokeAsync("StoreThemeSelector")
+            </div>
+        </div>
+    </div>
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.Footer })
+</div>

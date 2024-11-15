@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = Nop.Plugin.Pickup.PickupInStore
+build_property.ProjectDir = C:\git\BnBmall\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Pickup.PickupInStore\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

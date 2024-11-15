@@ -1,0 +1,186 @@
+.header-menu .sublist {
+    background: #fff;
+    border: 1px dashed #e3e3e3;
+}
+.header-menu .sublist li > a:before {
+	display: none;
+}
+.header-menu .sublist li:last-child > a {
+	border-bottom: 0;
+}
+.header-menu .sublist li:hover > a {
+	background: #f3f3f3;
+}
+.header-menu .sublist li:hover > a:before {
+	display: block;
+}
+
+/* blocks */
+
+.block .list li a:before {
+    display: none;
+}
+.block .list li.active > a:before, 
+.block.block-account-navigation .list li > a.active:before, 
+.block .list li:hover > a:before {
+    display: block;    
+}
+
+/* item boxes */
+
+.category-item .title a, .sub-category-item .title a {
+    background: #fff;
+}
+
+.category-page .item-box:nth-child(3n+1),
+.recently-added-products-page .item-box:nth-child(3n+1),
+.recently-viewed-products-page .item-box:nth-child(3n+1),
+.manufacturer-page .item-box:nth-child(3n+1),
+.vendor-page .item-box:nth-child(3n+1),
+.product-tag-page .item-box:nth-child(3n+1),
+.manufacturer-grid .item-box:nth-child(3n+1),
+.search-results .item-box:nth-child(3n+1) {
+    clear: both;
+    margin-left: 0;
+}
+.home-page-product-grid .item-box:nth-child(4n+1),
+.product-grid.bestsellers .item-box:nth-child(4n+1),
+.product-details-page .product-grid .item-box:nth-child(4n+1),
+.shopping-cart-page .item-box:nth-child(4n+1),
+.cross-sells .item-box:nth-child(4n+1) {
+    clear: both;
+    margin-left: 0;
+}
+
+.product-grid .item-box .description-wrapper, 
+.product-list .item-box .description-wrapper {
+    display: none;
+    background: rgb(233,203,180);
+}
+.product-grid .item-box:hover .description-wrapper,
+.product-list .item-box:hover .description-wrapper {
+    display: block;
+}
+
+.item-box input[type="button"] {
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bg-button-small.png',sizingMethod='scale')";
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bg-button-small.png',sizingMethod='scale');
+}
+
+/* product page */
+
+.overview .qty-input,
+.variant-overview .qty-input {
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+    padding-top: 5px;
+}
+.variant-overview .qty-input {
+    margin-right: 0;
+}
+.product-variant-list.list .variant-overview .qty-input {
+    margin-top: 4px;
+}
+.attribute-squares li {
+    float: left;
+}
+
+.ui-tabs .ui-tabs-nav li:nth-child(3n+1) a {
+    margin-left: 3px;
+}
+.product-variant-list.grid .product-variant-line:nth-child(3n+1) {
+    margin-left: 0;
+    clear: both;
+}    
+
+/* my account */
+
+.registration-page .fieldset:nth-child(2) select,
+.account-page .fieldset:nth-child(3) select {
+	width: 110px;
+}
+
+.account-page .address-item:nth-child(3n+1),
+.account-page .order-item:nth-child(3n+1) {
+    margin-left: 0;
+    clear: both;
+}
+
+/* news */
+
+.news-items .news-item:nth-child(2n+1) {
+    margin-left: 0;
+}
+
+.button-1.news-item-add-comment-button {
+    font-size: 18px;
+    padding: 6px 20px;
+}
+
+/* block newsletter */
+
+.newsletter {
+	padding: 55px 0;
+}
+
+.newsletter-subscribe {
+	padding:  0 0 0 115px;
+}
+.newsletter-subscribe:before {
+	top: 50%;
+	right: auto;
+	margin-top: -48px;
+}
+
+/* cart */
+
+.cart-collaterals .coupon-code input[type="text"] {
+    margin: -1px 0 0;
+}
+
+/* login */
+
+.login-page .button-1.checkout-as-guest-button {
+    background: url(../img/bg-button-big.png) no-repeat center;
+}
+
+/* myaccount */
+
+.button-1.submit-return-request-button {
+    background: url(../img/bg-button-big.png) no-repeat center;
+    font-size: 16px;
+    padding: 7px 20px;
+}
+.button-1.change-password-button {
+    background: url(../img/bg-button-big.png) no-repeat center;
+}
+
+/* review */
+
+.button-1.write-product-review-button {
+    font-size: 18px;
+    padding: 6px 20px;
+}
+
+/* contact */
+
+
+/* blog */
+
+.button-1.blog-post-add-comment-button {
+    font-size: 18px;
+    padding: 6px 20px;
+}
+
+/* footer */
+
+.footer-block:first-child a:after {
+    display: none;
+}
+
+/* mega menu */
+
+.mega-menu .dropdown {
+	background: #fff;
+}

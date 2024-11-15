@@ -1,0 +1,29 @@
+﻿<div class="header">
+    <div class="header-centering">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderBefore })
+        <div class="header-logo">
+            @await Component.InvokeAsync("Logo")
+        </div>
+        <div class="header-links-wrapper">
+            @await Component.InvokeAsync("HeaderLinks")
+            <div class="header-selectors-wrapper">
+
+                @await Component.InvokeAsync("TaxTypeSelector")
+                @await Component.InvokeAsync("CurrencySelector")
+                @await Component.InvokeAsync("LanguageSelector")
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderSelectors })
+            </div>
+        </div>
+        <div class="desktop-header-right">
+            <div class="search-box store-search-box">
+                @await Component.InvokeAsync("SearchBox")
+            </div>
+            <div class="desktop-cart">
+                <div class="shopping-cart-link">
+                    <a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a>
+                    @await Component.InvokeAsync("FlyoutShoppingCart")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

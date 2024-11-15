@@ -1,0 +1,5 @@
+﻿{
+  "DataConnectionString": "Data Source=L005718\\SQLEXPRESS;Initial Catalog=bnbmalllat;Integrated Security=True;Persist Security Info=False",
+  "DataProvider": "sqlserver",
+  "RawDataSettings": {}
+}

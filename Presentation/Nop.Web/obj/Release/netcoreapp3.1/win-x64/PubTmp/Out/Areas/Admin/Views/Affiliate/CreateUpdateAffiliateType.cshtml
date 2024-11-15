@@ -1,0 +1,53 @@
+@model AffiliateTypeModel
+@{
+    //page title
+    ViewBag.PageTitle = Model.Id > 0 ? T("Admin.Affiliates.EditAffiliateType").Text : T("Admin.Affiliates.CreateAffiliateType").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("AffiliateTypes");
+}
+<form asp-controller="Affiliate" asp-action="CreateUpdateAffiliateType" method="post">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @ViewBag.PageTitle @(Model.Id > 0 ? " - " +  Model.Name : "")
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a asp-action="AffiliateTypes">@T("Admin.Affiliates.BackToList")</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            @if(Model.Id > 0) {
+                <span id="affiliatetype-delete" class="btn bg-red">
+                    <i class="fa fa-trash-o"></i>
+                    @T("Admin.Common.Delete")
+                </span>
+            }
+        </div>
+    </div>
+    <div asp-validation-summary="All"></div>
+    <input asp-for="Id" type="hidden" />
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="Name" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="Name" asp-required="true" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<nop-delete-confirmation asp-model-id="@Model.Id" asp-button-id="affiliatetype-delete" asp-action="DeleteAffiliateType" />

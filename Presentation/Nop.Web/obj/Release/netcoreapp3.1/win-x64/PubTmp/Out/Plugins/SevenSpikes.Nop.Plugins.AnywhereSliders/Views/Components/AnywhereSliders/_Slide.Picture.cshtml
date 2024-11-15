@@ -1,0 +1,26 @@
+﻿@model SlidePublicModel
+
+@{
+    Layout = null;
+}
+
+<div class="picture-slide">    
+    @if(string.IsNullOrEmpty(Model.Url))
+    {
+        <img alt="@Model.Alt"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABAQMAAADdO609AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCNdjYGAAAAADAAEg1ZTHAAAAAElFTkSuQmCC"
+            data-lazy="@Model.PicturePath"
+            data-mobilePictureSrc="@Model.MobilePicturePath"
+            data-desktopPictureSrc="@Model.PicturePath" />
+    }
+    else
+    {
+        <a href="@Model.Url">
+            <img alt="@Model.Alt"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABAQMAAADdO609AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCNdjYGAAAAADAAEg1ZTHAAAAAElFTkSuQmCC"
+                data-lazy="@Model.PicturePath"
+                data-mobilePictureSrc="@Model.MobilePicturePath"
+                data-desktopPictureSrc="@Model.PicturePath" />
+        </a>
+    }
+</div>

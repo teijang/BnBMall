@@ -1,0 +1,108 @@
+﻿/*=====================================================
+    
+    DESKTOP - LARGE
+
+=====================================================*/
+
+@media all and (min-width: 1281px) {
+
+    .news-list-homepage,
+    .product-grid.bestsellers,
+    .product-grid.home-page-product-grid,
+    .home-page-category-grid .item-grid,
+    .sub-category-grid .item-grid,
+    .home-page .topic-block,
+    .breadcrumb,
+    .two-column-centering,
+    .product-details-page .page-body,
+    .product-details-page .item-grid,
+    .shopping-cart-page,
+    .checkout-page .checkout-data,
+    .order-details-page .page-body,
+    .return-request-page .page-body,
+    .shipment-details-page .page-body,
+    .wishlist-page .page-body,
+    .sitemap-page .page-body  {
+        width: 1200px;
+    }
+
+/* GLOBAL STYLES */
+
+    .inputs label,
+    .write-review .review-rating .name-description {
+        width: 255px;
+    }
+
+    #check-availability-button {
+        margin: 10px 0 0 360px;
+    }
+    .topic-block,
+    .topic-page .page-body {
+        max-width: 1200px;
+    }
+
+    .inputs.reversed input:first-child + label {
+        width: auto;
+        text-align: left;
+        margin: 0 0 0 10px;
+    }
+    .contact-page .form-fields,
+    .email-a-friend-page .form-fields,
+    .product-reviews-page .form-fields,
+    .apply-vendor-page .form-fields,
+    .registration-page .form-fields,
+    .login-page .form-fields,
+    .password-recovery-page .form-fields {
+        width: 890px;
+    }
+
+    /* HEADER */
+    .header-centering {
+        width: 1200px;
+    }
+
+/* HEADER MENU */
+
+    .header-menu > ul {
+        width: 1200px;
+    }
+
+/* FOOTER */
+
+    .footer-centering {
+        width: 1200px;
+    }
+
+
+
+/* CATEGORY PAGE & GRIDS */
+
+    /* product list */
+
+    .product-list .details {
+        width: calc(100% - 170px);
+    }
+ 
+
+/* SHOPPING CART & CHECKOUT */
+
+    .cart-collaterals {
+	    width: 750px;
+	    margin: 0;
+    }
+
+    .cart-footer .totals {
+        width: 350px;
+    }
+
+    .checkout-page .edit-address label {
+        width: 390px;
+    }
+
+ 
+/* POLLS */
+    .polls-centering {
+        width: 1200px;
+    }
+
+}

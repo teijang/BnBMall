@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Payment methods",
+  "FriendlyName": "Payment Wall",
+  "SystemName": "Payments.PaymentWall",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.30" ],
+  "Author": "Parth S. Patel",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Payments.PaymentWall.dll",
+  "Description": "This plugin allows paying with PaymentWall"
+}

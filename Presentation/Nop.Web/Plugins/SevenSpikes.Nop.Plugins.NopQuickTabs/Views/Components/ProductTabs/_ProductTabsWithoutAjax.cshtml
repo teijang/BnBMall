@@ -1,0 +1,32 @@
+﻿@model TabUIModel
+
+<div class="productTabs-header">
+    <ul>
+        @foreach(var tabInfo in Model.Tabs) {
+            if(tabInfo.TabKey != "contact_us" && tabInfo.TabKey != "reviews") {
+                <li>
+                    <a href="#quickTab-@tabInfo.TabKey">@tabInfo.Title</a>
+                </li>
+            }
+        }
+        @* Uncomment the code below if you want to have a Tab that gets its information from a Topic. This tab will be shown for all products in your store*@
+        <li><a href="#quickTab-ProductReviews">@T("Product.Reviews")</a> </li>
+        <li><a href="#quickTab-ProductQA">@T("Product.QA")</a> </li>
+    </ul>
+</div>
+<div class="productTabs-body">
+    @foreach(var tabInfo in Model.Tabs) {
+        if(tabInfo.TabKey != "contact_us" && tabInfo.TabKey != "reviews") {
+            <div id="quickTab-@tabInfo.TabKey">
+                @Html.Raw(tabInfo.Content)
+            </div>
+        }
+    }
+    @* Uncomment the code below if you want to have a Tab that gets its information from a Topic. This tab will be shown for all products in your store *@
+    <div id="quickTab-ProductReviews">
+        @await Component.InvokeAsync("ProductReviews")
+    </div>
+    <div id="quickTab-ProductQA">
+        @await Component.InvokeAsync("ProductQuestionAnswer")
+    </div>
+</div>

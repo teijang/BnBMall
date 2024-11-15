@@ -1,0 +1,54 @@
+@using OfficeOpenXml.FormulaParsing.Excel.Functions.Math
+@model AffiliateSearchModel
+
+@{
+    //page title
+    ViewBag.PageTitle = T("Admin.AffiliateTypes").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("AffiliateTypes");
+}
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Admin.AffiliateTypes")
+    </h1>
+    <div class="pull-right">
+        <a asp-action="CreateUpdateAffiliateType" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            @T("Admin.Common.AddNew")
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @await Html.PartialAsync("Table", new DataTablesModel
+                    {
+                        Name = "affiliatetypes-grid",
+                        UrlRead = new DataUrl("AffiliateTypeList", "Affiliate", null),
+                        Length = Model.PageSize,
+                        LengthMenu = Model.AvailablePageSizes,                      
+                        ColumnCollection = new List<ColumnProperty>
+                        {
+                            new ColumnProperty($"{nameof(AffiliateTypeModel.Name)}")
+                            {
+                                Title = T("Admin.AffiliateTypes.Fields.Name").Text,
+                                Width = "200"
+                            },                           
+                            new ColumnProperty(nameof(AffiliateTypeModel.Id))
+                            {
+                                Title = T("Admin.Common.Edit").Text,
+                                Width = "100",
+                                ClassName = NopColumnClassDefaults.Button,
+                                Render = new RenderButtonEdit(new DataUrl("CreateUpdateAffiliateType"))
+                            }
+                        }
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
